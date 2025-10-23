@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "timetable": [
+    {
+      "subject": "Operating Systems",
+      "subject_id": "OS",
+      "teacher": "Dr. Smith",
+      "teacher_id": "T1",
+      "room": "Classroom 301",
+      "room_id": "C301",
+      "batch": "TY CSE A",
+      "batch_id": "B1",
+      "start_slot": "Mon_9",
+      "end_slot": "Mon_10",
+      "duration": 2,
+      "type": "theory",
+      "all_slots": [
+        "Mon_9",
+        "Mon_10"
+      ]
+    }
+  ],
+  "total_assignments": 1
+}

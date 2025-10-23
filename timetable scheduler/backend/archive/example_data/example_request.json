@@ -1,0 +1,76 @@
+{
+  "teachers": [
+    {
+      "id": "T1",
+      "name": "Dr. Smith",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Tue_9", "Tue_10", "Wed_9", "Wed_10"],
+      "subjects": ["OS", "DBMS"]
+    },
+    {
+      "id": "T2",
+      "name": "Prof. Johnson",
+      "available_slots": ["Mon_2", "Mon_3", "Tue_2", "Tue_3", "Wed_2", "Wed_3"],
+      "subjects": ["ML", "AI"]
+    },
+    {
+      "id": "T3",
+      "name": "Dr. Brown",
+      "available_slots": ["Mon_9", "Mon_10", "Tue_9", "Tue_10", "Wed_9", "Wed_10"],
+      "subjects": ["MLBC_Lab"]
+    }
+  ],
+  "rooms": [
+    {
+      "id": "C301",
+      "name": "Classroom 301",
+      "type": "classroom",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Mon_2", "Mon_3", "Tue_9", "Tue_10", "Tue_11", "Tue_2", "Tue_3", "Wed_9", "Wed_10", "Wed_11", "Wed_2", "Wed_3"],
+      "capacity": 60
+    },
+    {
+      "id": "Lab2",
+      "name": "Computer Lab 2",
+      "type": "lab",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Mon_2", "Mon_3", "Tue_9", "Tue_10", "Tue_11", "Tue_2", "Tue_3", "Wed_9", "Wed_10", "Wed_11", "Wed_2", "Wed_3"],
+      "capacity": 30
+    }
+  ],
+  "subjects": [
+    {
+      "id": "OS",
+      "name": "Operating Systems",
+      "type": "theory",
+      "duration": 2,
+      "teachers": ["T1"],
+      "required_room_type": "classroom"
+    },
+    {
+      "id": "ML",
+      "name": "Machine Learning",
+      "type": "theory",
+      "duration": 2,
+      "teachers": ["T2"],
+      "required_room_type": "classroom"
+    },
+    {
+      "id": "MLBC_Lab",
+      "name": "MLBC Lab",
+      "type": "practical",
+      "duration": 2,
+      "teachers": ["T3"],
+      "required_room_type": "lab"
+    }
+  ],
+  "batches": [
+    {
+      "id": "TYCSE_A",
+      "name": "TY CSE A",
+      "subjects": ["OS", "ML", "MLBC_Lab"],
+      "strength": 60
+    }
+  ],
+  "days": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+  "time_slots": ["9", "10", "11", "12", "1", "2", "3"],
+  "break_start": "12",
+  "break_end": "1"
+}

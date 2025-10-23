@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Timetable Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Academic Timetable Mini Project</h1>
+                <div class="user-info">
+                    <span class="role-badge" id="userRole">Admin</span>
+                    <button class="btn-icon" id="notificationBtn">🔔</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <button class="nav-btn active" data-view="generate">Generate Timetable</button>
+            <button class="nav-btn" data-view="view">View Schedule</button>
+            <button class="nav-btn" data-view="departments">Departments</button>
+            <button class="nav-btn" data-view="rooms">Rooms & Labs</button>
+            <button class="nav-btn" data-view="settings">Settings</button>
+        </nav>
+
+        <!-- Generate Timetable View -->
+        <div class="view active" id="generateView">
+            <div class="content-wrapper">
+                
+                <!-- Step 1: Week Configuration -->
+                <section class="card">
+                    <h2>1. Week Configuration</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Week Start Time</label>
+                            <input type="time" id="weekStartTime" value="09:00">
+                        </div>
+                        <div class="form-group">
+                            <label>Week End Time</label>
+                            <input type="time" id="weekEndTime" value="16:00">
+                        </div>
+                        <div class="form-group">
+                            <label>Working Days</label>
+                            <div class="days-selector">
+                                <label><input type="checkbox" value="Monday" checked> Mon</label>
+                                <label><input type="checkbox" value="Tuesday" checked> Tue</label>
+                                <label><input type="checkbox" value="Wednesday" checked> Wed</label>
+                                <label><input type="checkbox" value="Thursday" checked> Thu</label>
+                                <label><input type="checkbox" value="Friday" checked> Fri</label>
+                                <label><input type="checkbox" value="Saturday"> Sat</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Lunch Break Start</label>
+                            <input type="time" id="lunchStartTime" value="13:00">
+                        </div>
+                        <div class="form-group">
+                            <label>Lunch Break End</label>
+                            <input type="time" id="lunchEndTime" value="14:00">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 2: Department Selection -->
+                <section class="card">
+                    <h2>2. Department Selection</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Select Department</label>
+                            <select id="departmentSelect">
+                                <option value="">Select Department</option>
+                            </select>
+                            <button class="btn-secondary btn-sm" id="addDepartmentBtn">+ Add New Department</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 3: Year Selection (Multiple Years) -->
+                <section class="card">
+                    <h2>3. Academic Year Configuration</h2>
+                    <div class="year-tabs">
+                        <button class="year-tab active" data-year="1">First Year</button>
+                        <button class="year-tab" data-year="2">Second Year</button>
+                        <button class="year-tab" data-year="3">Third Year</button>
+                        <button class="year-tab" data-year="4">Fourth Year</button>
+                    </div>
+
+                    <!-- First Year Configuration -->
+                    <div class="year-config active" id="year1Config">
+                        <h3>First Year Configuration</h3>
+                        
+                        <h4>Subjects Configuration</h4>
+                        <div class="subjects-list" id="subjectsListYear1"></div>
+                        
+                        <h4>Maths Tutorial</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="mathsTutorialToggle1">
+                            Enable Maths Tutorial Sessions (2 hours per week)
+                        </label>
+                    </div>
+
+                    <!-- Second Year Configuration -->
+                    <div class="year-config" id="year2Config">
+                        <h3>Second Year Configuration</h3>
+                        
+                        <h4>Subjects Configuration</h4>
+                        <button class="btn-secondary btn-sm" id="addSubjectYear2Btn">+ Add Subject</button>
+                        <div class="subjects-list" id="subjectsListYear2"></div>
+                        
+                        <h4>Maths Tutorial</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="mathsTutorialToggle2">
+                            Enable Maths Tutorial Sessions (2 hours per week)
+                        </label>
+                        
+                        <h4>Mini-Project</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="miniProjectToggle2">
+                            Enable Mini-Project Sessions (2 hours per week)
+                        </label>
+                    </div>
+
+                    <!-- Third Year Configuration -->
+                    <div class="year-config" id="year3Config">
+                        <h3>Third Year Configuration</h3>
+                        
+                        <h4>Subjects Configuration</h4>
+                        <div class="subjects-list" id="subjectsListYear3"></div>
+                        
+                        <h4>Mini-Project</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="miniProjectToggle3">
+                            Enable Mini-Project Sessions (2 hours per week)
+                        </label>
+                    </div>
+
+                    <!-- Fourth Year Configuration -->
+                    <div class="year-config" id="year4Config">
+                        <h3>Fourth Year Configuration</h3>
+                        
+                        <h4>Subjects Configuration</h4>
+                        <div class="subjects-list" id="subjectsListYear4"></div>
+                        
+                        <h4>Mini-Project</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="miniProjectToggle4">
+                            Enable Mini-Project Sessions (2 hours per week)
+                        </label>
+                    </div>
+                </section>
+
+
+                <!-- Step 5: Generate Options -->
+                <section class="card">
+                    <h2>5. Generate Timetable</h2>
+                    <div class="generate-options">
+                        <label>
+                            <input type="radio" name="generateMode" value="all" checked>
+                            Generate for All Years (First to Fourth)
+                        </label>
+                        <label>
+                            <input type="radio" name="generateMode" value="individual">
+                            Generate for Individual Year
+                        </label>
+                        <div id="individualYearSelect" style="display: none; margin-top: 1rem;">
+                            <select id="generateYearSelect">
+                                <option value="1">First Year</option>
+                                <option value="2">Second Year</option>
+                                <option value="3">Third Year</option>
+                                <option value="4">Fourth Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Generate Button -->
+                <div class="generate-section">
+                    <button class="btn-primary btn-large" id="generateBtn">
+                        Generate Timetable
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Schedule View -->
+        <div class="view" id="viewView">
+            <div class="content-wrapper">
+                <!-- Filter Bar -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <select id="filterDept">
+                            <option value="">All Departments</option>
+                        </select>
+                        <select id="filterYear">
+                            <option value="">All Years</option>
+                            <option value="1">First Year</option>
+                            <option value="2">Second Year</option>
+                            <option value="3">Third Year</option>
+                            <option value="4">Fourth Year</option>
+                        </select>
+                        <select id="filterRoom">
+                            <option value="">All Rooms</option>
+                        </select>
+                    </div>
+                    <div class="view-toggles">
+                        <button class="view-toggle-btn active" data-viewtype="grid">Grid View</button>
+                        <button class="view-toggle-btn" data-viewtype="timeline">Timeline View</button>
+                        <button class="view-toggle-btn" data-viewtype="agenda">Agenda View</button>
+                    </div>
+                </div>
+
+                <!-- Grid View -->
+                <div class="schedule-view" id="gridView">
+                    <div class="schedule-controls">
+                        <button class="btn-secondary" id="exportPdfBtn">Export PDF</button>
+                        <button class="btn-secondary" id="exportExcelBtn">Export Excel</button>
+                        <button class="btn-secondary" id="exportIcalBtn">Export iCal</button>
+                        <button class="btn-primary" id="publishBtn">Publish Schedule</button>
+                    </div>
+                    
+                    <div class="timetable-grid" id="timetableGrid">
+                        <!-- Timetable grid will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Timeline View -->
+                <div class="schedule-view" id="timelineView" style="display: none;">
+                    <div class="timeline-container" id="timelineContainer">
+                        <!-- Timeline will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Agenda View -->
+                <div class="schedule-view" id="agendaView" style="display: none;">
+                    <div class="agenda-container" id="agendaContainer">
+                        <!-- Agenda will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departments View -->
+        <div class="view" id="departmentsView">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h2>Department Management</h2>
+                    <button class="btn-primary" id="addDeptModalBtn">+ Add Department</button>
+                </div>
+                <div class="departments-grid" id="departmentsGrid">
+                    <!-- Departments list will be generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Rooms View -->
+        <div class="view" id="roomsView">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h2>Rooms & Labs Management</h2>
+                    <button class="btn-primary" id="addRoomBtn">+ Add Room/Lab</button>
+                </div>
+                <div class="rooms-grid" id="roomsGrid">
+                    <!-- Rooms list will be generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings View -->
+        <div class="view" id="settingsView">
+            <div class="content-wrapper">
+                <h2>Settings</h2>
+                <section class="card">
+                    <h3>General Settings</h3>
+                    <div class="form-group">
+                        <label>Institution Name</label>
+                        <input type="text" id="institutionName" placeholder="Enter institution name">
+                    </div>
+                    <div class="form-group">
+                        <label>Academic Year</label>
+                        <input type="text" id="academicYear" placeholder="e.g., 2024-2025">
+                    </div>
+                    <button class="btn-primary">Save Settings</button>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Department Management -->
+    <div class="modal" id="departmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add/Edit Department</h3>
+                <button class="modal-close" id="closeDepartmentModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Department Name</label>
+                    <input type="text" id="deptName" placeholder="e.g., Computer Science">
+                </div>
+                <div class="form-group">
+                    <label>Department Code</label>
+                    <input type="text" id="deptCode" placeholder="e.g., CS">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="deptDescription" rows="3" placeholder="Enter department description"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelDeptBtn">Cancel</button>
+                <button class="btn-primary" id="saveDeptBtn">Save Department</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Room Management -->
+    <div class="modal" id="roomModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add/Edit Room/Lab</h3>
+                <button class="modal-close" id="closeRoomModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Room/Lab Name</label>
+                    <input type="text" id="roomName" placeholder="e.g., Room 101 or EE Lab 7">
+                </div>
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <select id="roomType">
+                        <option value="classroom">Classroom</option>
+                        <option value="lab">Laboratory</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Capacity</label>
+                    <input type="number" id="roomCapacity" placeholder="Number of students">
+                </div>
+                <div class="form-group">
+                    <label>Building/Location</label>
+                    <input type="text" id="roomLocation" placeholder="Building name">
+                </div>
+                <div class="form-group">
+                    <label>Equipment Tags (comma-separated)</label>
+                    <input type="text" id="roomTags" placeholder="e.g., computers, projector, whiteboard">
+                </div>
+                <div class="form-group" id="labSubjectGroup" style="display: none;">
+                    <label>Associated Subject (for Labs)</label>
+                    <input type="text" id="labSubject" placeholder="e.g., Basic Electrical Engineering">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelRoomBtn">Cancel</button>
+                <button class="btn-primary" id="saveRoomBtn">Save Room/Lab</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Generating timetable using GNN algorithm...</p>
+    </div>
+
+    <script src="subjects_data.js"></script>
+    <script src="hardcoded_data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

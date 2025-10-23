@@ -1,0 +1,75 @@
+2025-10-07 03:04:26,472 - TimetableApp - INFO - Starting Academic Timetable Generator Application...
+2025-10-07 03:04:26,699 - TimetableApp - INFO - Database tables created successfully
+2025-10-07 03:04:26,730 - TimetableApp - INFO - Created default week configuration
+2025-10-07 03:04:26,730 - TimetableApp - INFO - Application starting on port 5000
+2025-10-07 03:04:26,731 - TimetableApp - INFO - GNN-based timetable generation enabled
+2025-10-07 03:04:26,731 - TimetableApp - INFO - Using device: CPU
+2025-10-07 03:04:26,895 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.163:5000
+2025-10-07 03:04:26,897 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-10-07 03:04:26,916 - werkzeug - INFO -  * Restarting with stat
+2025-10-07 03:04:30,864 - TimetableApp - INFO - Starting Academic Timetable Generator Application...
+2025-10-07 03:04:30,868 - TimetableApp - INFO - Database tables created successfully
+2025-10-07 03:04:30,916 - TimetableApp - INFO - Application starting on port 5000
+2025-10-07 03:04:30,917 - TimetableApp - INFO - GNN-based timetable generation enabled
+2025-10-07 03:04:30,917 - TimetableApp - INFO - Using device: CPU
+2025-10-07 03:04:30,935 - werkzeug - WARNING -  * Debugger is active!
+2025-10-07 03:04:30,940 - werkzeug - INFO -  * Debugger PIN: 179-284-392
+2025-10-07 03:05:03,008 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:03] "[36mGET / HTTP/1.1[0m" 304 -
+2025-10-07 03:05:03,572 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:03] "[36mGET /styles.css HTTP/1.1[0m" 304 -
+2025-10-07 03:05:03,573 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:03] "[36mGET /script.js HTTP/1.1[0m" 304 -
+2025-10-07 03:05:04,841 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:04] "GET /api/departments HTTP/1.1" 200 -
+2025-10-07 03:05:05,210 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:05] "GET /api/rooms HTTP/1.1" 200 -
+2025-10-07 03:05:27,231 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:27] "OPTIONS /api/generate-timetable HTTP/1.1" 200 -
+2025-10-07 03:05:27,550 - TimetableApp - ERROR - Unhandled exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+Traceback (most recent call last):
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\werkzeug\routing\map.py", line 624, in match
+    raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-10-07 03:05:27,589 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:27] "[35m[1mPOST /api/generate-timetable HTTP/1.1[0m" 500 -
+2025-10-07 03:05:43,109 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:43] "OPTIONS /api/generate-timetable HTTP/1.1" 200 -
+2025-10-07 03:05:43,423 - TimetableApp - ERROR - Unhandled exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+Traceback (most recent call last):
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\werkzeug\routing\map.py", line 624, in match
+    raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-10-07 03:05:43,425 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:05:43] "[35m[1mPOST /api/generate-timetable HTTP/1.1[0m" 500 -
+2025-10-07 03:06:13,171 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:06:13] "OPTIONS /api/generate-timetable HTTP/1.1" 200 -
+2025-10-07 03:06:13,483 - TimetableApp - ERROR - Unhandled exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+Traceback (most recent call last):
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+  File "D:\timetable scheduler\timetableproject\venv\Lib\site-packages\werkzeug\routing\map.py", line 624, in match
+    raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-10-07 03:06:13,485 - werkzeug - INFO - 127.0.0.1 - - [07/Oct/2025 03:06:13] "[35m[1mPOST /api/generate-timetable HTTP/1.1[0m" 500 -

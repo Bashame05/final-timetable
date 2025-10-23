@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Backend API</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        textarea { width: 100%; height: 300px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Test Backend API</h1>
+    
+    <button onclick="testBackend()">Test /api/timetable/generate</button>
+    
+    <h2>Response:</h2>
+    <textarea id="response" readonly></textarea>
+    
+    <script>
+        async function testBackend() {
+            const responseEl = document.getElementById('response');
+            responseEl.value = 'Testing...\n';
+            
+            const testData = {
+                "department": "Computer Science",
+                "week_config": {
+                    "week_start_time": "09:00",
+                    "week_end_time": "16:00",
+                    "lunch_start": "13:00",
+                    "lunch_end": "14:00",
+                    "working_days": ["Mon", "Tue", "Wed", "Thu", "Fri"]
+                },
+                "rooms": [
+                    {
+                        "name": "Room 101",
+                        "type": "classroom",
+                        "capacity": 60,
+                        "location": "Building A"
+                    }
+                ],
+                "subjects": [
+                    {
+                        "name": "Mathematics",
+                        "type": "theory",
+                        "hours_per_week": 3
+                    }
+                ],
+                "special_sessions": {}
+            };
+            
+            responseEl.value += 'Request:\n' + JSON.stringify(testData, null, 2) + '\n\n';
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/timetable/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                responseEl.value += `Status: ${response.status}\n\n`;
+                
+                const result = await response.json();
+                responseEl.value += 'Response:\n' + JSON.stringify(result, null, 2);
+                
+                if (response.ok) {
+                    responseEl.style.color = 'green';
+                } else {
+                    responseEl.style.color = 'red';
+                }
+            } catch (error) {
+                responseEl.value += 'Error: ' + error.message;
+                responseEl.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>

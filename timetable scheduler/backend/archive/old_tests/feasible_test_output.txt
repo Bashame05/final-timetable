@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "reason": "no_variables",
+  "message": "No valid variable combinations found. Check teacher/room availability and subject-batch assignments.",
+  "timetable": []
+}

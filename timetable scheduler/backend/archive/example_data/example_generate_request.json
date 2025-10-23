@@ -1,0 +1,142 @@
+{
+  "teachers": [
+    {
+      "id": "T1",
+      "name": "Dr. Smith",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Tue_9", "Tue_10", "Wed_9", "Wed_10"],
+      "subjects": ["OS", "DBMS"]
+    },
+    {
+      "id": "T2",
+      "name": "Dr. Brown",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Tue_9", "Tue_10", "Wed_9", "Wed_10"],
+      "subjects": ["Lab", "OS_Lab"]
+    },
+    {
+      "id": "T3",
+      "name": "Prof. Johnson",
+      "available_slots": ["Mon_2", "Mon_3", "Tue_2", "Tue_3", "Wed_2", "Wed_3"],
+      "subjects": ["ML", "AI"]
+    },
+    {
+      "id": "T4",
+      "name": "Dr. Wilson",
+      "available_slots": ["Mon_2", "Mon_3", "Tue_2", "Tue_3", "Wed_2", "Wed_3"],
+      "subjects": ["Major_Project", "Mini_Project"]
+    },
+    {
+      "id": "T5",
+      "name": "Dr. Davis",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Tue_9", "Tue_10", "Wed_9", "Wed_10"],
+      "subjects": ["CN", "SE"]
+    }
+  ],
+  "subjects": [
+    {
+      "id": "OS",
+      "name": "Operating Systems",
+      "type": "theory",
+      "duration": 2,
+      "teachers": ["T1"]
+    },
+    {
+      "id": "DBMS",
+      "name": "Database Management Systems",
+      "type": "theory",
+      "duration": 2,
+      "teachers": ["T1"]
+    },
+    {
+      "id": "Lab",
+      "name": "Programming Lab",
+      "type": "practical",
+      "duration": 2,
+      "teachers": ["T2"]
+    },
+    {
+      "id": "OS_Lab",
+      "name": "OS Lab",
+      "type": "practical",
+      "duration": 2,
+      "teachers": ["T2"]
+    },
+    {
+      "id": "ML",
+      "name": "Machine Learning",
+      "type": "theory",
+      "duration": 2,
+      "teachers": ["T3"]
+    },
+    {
+      "id": "AI",
+      "name": "Artificial Intelligence",
+      "type": "theory",
+      "duration": 1,
+      "teachers": ["T3"]
+    },
+    {
+      "id": "Major_Project",
+      "name": "Major Project",
+      "type": "major_project",
+      "duration": 3,
+      "teachers": ["T4"]
+    },
+    {
+      "id": "Mini_Project",
+      "name": "Mini Project",
+      "type": "mini_project",
+      "duration": 2,
+      "teachers": ["T4"]
+    },
+    {
+      "id": "CN",
+      "name": "Computer Networks",
+      "type": "theory",
+      "duration": 2,
+      "teachers": ["T5"]
+    },
+    {
+      "id": "SE",
+      "name": "Software Engineering",
+      "type": "theory",
+      "duration": 1,
+      "teachers": ["T5"]
+    }
+  ],
+  "rooms": [
+    {
+      "id": "C301",
+      "name": "Classroom 301",
+      "type": "classroom",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Mon_2", "Mon_3", "Tue_9", "Tue_10", "Tue_11", "Tue_2", "Tue_3", "Wed_9", "Wed_10", "Wed_11", "Wed_2", "Wed_3"]
+    },
+    {
+      "id": "C302",
+      "name": "Classroom 302",
+      "type": "classroom",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Mon_2", "Mon_3", "Tue_9", "Tue_10", "Tue_11", "Tue_2", "Tue_3", "Wed_9", "Wed_10", "Wed_11", "Wed_2", "Wed_3"]
+    },
+    {
+      "id": "Lab1",
+      "name": "Computer Lab 1",
+      "type": "lab",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Mon_2", "Mon_3", "Tue_9", "Tue_10", "Tue_11", "Tue_2", "Tue_3", "Wed_9", "Wed_10", "Wed_11", "Wed_2", "Wed_3"]
+    },
+    {
+      "id": "Lab2",
+      "name": "Computer Lab 2",
+      "type": "lab",
+      "available_slots": ["Mon_9", "Mon_10", "Mon_11", "Mon_2", "Mon_3", "Tue_9", "Tue_10", "Tue_11", "Tue_2", "Tue_3", "Wed_9", "Wed_10", "Wed_11", "Wed_2", "Wed_3"]
+    }
+  ],
+  "batches": [
+    {
+      "id": "TYCSE_A",
+      "name": "TY CSE A",
+      "subjects": ["OS", "DBMS", "Lab", "OS_Lab", "ML", "AI", "Major_Project", "Mini_Project", "CN", "SE"]
+    }
+  ],
+  "days": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+  "time_slots": ["9", "10", "11", "12", "1", "2", "3"]
+}
+

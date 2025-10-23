@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "reason": "no feasible solution",
+  "details": "The given constraints cannot be satisfied with the provided data"
+}

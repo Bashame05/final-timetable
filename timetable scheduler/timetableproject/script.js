@@ -1371,8 +1371,81 @@ function exportToPDF() {
         return;
     }
     
-    // Use browser's print to PDF functionality
-    window.print();
+    const timetableKey = `year${filterYear}`;
+    const timetable = appState.timetables[timetableKey] || [];
+    
+    if (timetable.length === 0) {
+        alert('No timetable data to export');
+        return;
+    }
+    
+    try {
+        // Create new PDF document
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('l', 'mm', 'a4'); // landscape, millimeters, A4
+        
+        // Add title
+        doc.setFontSize(18);
+        doc.text(`Timetable - Year ${filterYear}`, 14, 15);
+        
+        // Group by day
+        const dayOrder = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const days = [...new Set(timetable.map(t => t.day))].sort((a, b) => 
+            dayOrder.indexOf(a) - dayOrder.indexOf(b)
+        );
+        
+        let yPosition = 25;
+        
+        days.forEach(day => {
+            const daySlots = timetable.filter(t => t.day === day)
+                .sort((a, b) => a.start_hour - b.start_hour);
+            
+            // Day header
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold');
+            doc.text(day, 14, yPosition);
+            yPosition += 7;
+            
+            // Create table data
+            const tableData = daySlots.map(slot => [
+                slot.slot || `${slot.start_time}-${slot.end_time}`,
+                slot.subject || 'N/A',
+                slot.room || 'N/A',
+                slot.type || 'N/A',
+                slot.teacher || ''
+            ]);
+            
+            // Add table
+            doc.autoTable({
+                startY: yPosition,
+                head: [['Time', 'Subject', 'Room', 'Type', 'Teacher']],
+                body: tableData,
+                theme: 'grid',
+                styles: { fontSize: 10 },
+                headStyles: { fillColor: [37, 99, 235], textColor: 255 },
+                margin: { left: 14 },
+                didDrawPage: function(data) {
+                    yPosition = data.cursor.y + 10;
+                }
+            });
+            
+            yPosition = doc.lastAutoTable.finalY + 10;
+            
+            // Check if we need a new page
+            if (yPosition > 180 && day !== days[days.length - 1]) {
+                doc.addPage();
+                yPosition = 20;
+            }
+        });
+        
+        // Save the PDF
+        doc.save(`timetable_year${filterYear}.pdf`);
+        alert('PDF exported successfully!');
+        
+    } catch (error) {
+        console.error('PDF export error:', error);
+        alert('Error exporting PDF. Please try again.');
+    }
 }
 
 function exportToExcel() {

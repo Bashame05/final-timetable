@@ -79,6 +79,7 @@ def solve_relaxed(
         for subject in subjects:
             subject_name = subject["name"]
             subject_type = subject["type"]
+            subject_teacher = subject.get("teacher", "")
             
             # Calculate hours needed - handle both old and new format
             if "hours_per_week" in subject:
@@ -119,7 +120,8 @@ def solve_relaxed(
                         "room": room,
                         "day": day,
                         "hour": hour,
-                        "hours_needed": hours_needed
+                        "hours_needed": hours_needed,
+                        "teacher": subject_teacher
                     }
         
         logger.info(f"Created {len(variables)} variables")
@@ -266,6 +268,9 @@ def solve_relaxed(
                     start_hour = var_data["hour"]
                     end_hour = start_hour + 1
                     
+                    start_time_str = f"{start_hour:02d}:00"
+                    end_time_str = f"{end_hour:02d}:00"
+                    
                     timetable.append({
                         "subject": var_data["subject"],
                         "room": var_data["room"],
@@ -274,8 +279,10 @@ def solve_relaxed(
                         "end_hour": end_hour,
                         "duration": 1,
                         "type": var_data["subject_type"],
-                        "start_time": f"{start_hour:02d}:00",
-                        "end_time": f"{end_hour:02d}:00"
+                        "start_time": start_time_str,
+                        "end_time": end_time_str,
+                        "slot": f"{start_time_str}-{end_time_str}",
+                        "teacher": var_data.get("teacher", "")
                     })
             
             # Sort by day and time

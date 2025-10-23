@@ -734,7 +734,8 @@ async function simulateBackendCall(data) {
     const subjects = data.yearConfigs[targetYear].subjects.map(s => ({
         name: s.name,
         type: s.type === 'both' ? 'theory+lab' : s.type,
-        hours_per_week: s.theoryHours + (s.practicalHours || 0)
+        hours_per_week: s.theoryHours + (s.practicalHours || 0),
+        teacher: s.teacher || ''
     }));
     console.log('Converted subjects:', subjects);
     
@@ -889,11 +890,11 @@ function initializeViewToggles() {
         });
     }
 
-    // Export buttons
-    document.getElementById('exportPdfBtn').addEventListener('click', exportPDF);
-    document.getElementById('exportExcelBtn').addEventListener('click', exportExcel);
-    document.getElementById('exportIcalBtn').addEventListener('click', exportICal);
-    document.getElementById('publishBtn').addEventListener('click', publishTimetable);
+    // Publish button
+    const publishBtn = document.getElementById('publishBtn');
+    if (publishBtn) {
+        publishBtn.addEventListener('click', publishTimetable);
+    }
 }
 
 function renderTimetableGrid() {
@@ -952,6 +953,7 @@ function renderTimetableGrid() {
                         <div class="class-block ${cls.type}">
                             <div class="class-subject">${cls.subject || 'N/A'}</div>
                             <div class="class-room">${cls.room || 'N/A'}</div>
+                            ${cls.teacher ? `<div class="class-teacher">${cls.teacher}</div>` : ''}
                         </div>
                     `;
                 });
@@ -1047,18 +1049,6 @@ function renderAgendaView() {
     });
     
     container.innerHTML = html || '<p class="text-muted">No schedule data available</p>';
-}
-
-function exportPDF() {
-    alert('Export to PDF functionality will be implemented with backend integration');
-}
-
-function exportExcel() {
-    alert('Export to Excel functionality will be implemented with backend integration');
-}
-
-function exportICal() {
-    alert('Export to iCal functionality will be implemented with backend integration');
 }
 
 function publishTimetable() {
@@ -1368,6 +1358,56 @@ for (let year = 1; year <= 4; year++) {
     document.getElementById(`year${year}StudentsPerBatch`)?.addEventListener('change', function() {
         appState.yearConfigs[year].studentsPerBatch = parseInt(this.value);
     });
+}
+
+// Export Functions
+document.getElementById('exportPdfBtn')?.addEventListener('click', exportToPDF);
+document.getElementById('exportExcelBtn')?.addEventListener('click', exportToExcel);
+
+function exportToPDF() {
+    const filterYear = document.getElementById('filterYear').value;
+    if (!filterYear) {
+        alert('Please select a year to export');
+        return;
+    }
+    
+    // Use browser's print to PDF functionality
+    window.print();
+}
+
+function exportToExcel() {
+    const filterYear = document.getElementById('filterYear').value;
+    if (!filterYear) {
+        alert('Please select a year to export');
+        return;
+    }
+    
+    const timetableKey = `year${filterYear}`;
+    const timetable = appState.timetables[timetableKey] || [];
+    
+    if (timetable.length === 0) {
+        alert('No timetable data to export');
+        return;
+    }
+    
+    // Create CSV content
+    let csv = 'Day,Time,Subject,Room,Type,Teacher\n';
+    timetable.forEach(slot => {
+        csv += `${slot.day},${slot.slot},${slot.subject},${slot.room},${slot.type},${slot.teacher || ''}\n`;
+    });
+    
+    // Download CSV file
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `timetable_year${filterYear}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    
+    alert('Timetable exported as CSV (can be opened in Excel)');
 }
 
 // Make functions globally accessible

@@ -940,3 +940,42 @@ body {
         box-shadow: none;
     }
 }
+
+/* Timetable Class Block Styling */
+.class-block {
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    background: var(--primary-color);
+    color: white;
+}
+
+.class-block.theory {
+    background: #3b82f6;
+}
+
+.class-block.practical {
+    background: #10b981;
+}
+
+.class-block.theory+lab {
+    background: #8b5cf6;
+}
+
+.class-subject {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.class-room {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.class-teacher {
+    font-size: 11px;
+    opacity: 0.85;
+    font-style: italic;
+    margin-top: 2px;
+}
